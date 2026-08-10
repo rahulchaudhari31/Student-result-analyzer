@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+.env
+.env.local
+
+# Secrets
+service_account.json
+serviceAccountKey.json
+*firebase*.json
+
+# Backend (FastAPI)
+backend/.env
+
+# Frontend (React/Vite)
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

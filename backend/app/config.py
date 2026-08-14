@@ -26,11 +26,16 @@ FIREBASE_REST_URL = (
 )
 FIREBASE_AUTH_URL = "https://identitytoolkit.googleapis.com/v1"
 
-ALLOWED_ORIGINS = [
-    origin.strip()
-    for origin in _env_or(
-        "CORS_ORIGINS",
-        "http://localhost:5173,http://localhost:3000,https://localhost:5173",
-    ).split(",")
-    if origin.strip()
+REQUIRED_CORS_ORIGINS = [
+    "http://localhost:5173",
+    "https://new-result-analysis-system-6zcb.vercel.app",
 ]
+
+
+def _split_origins(raw: str) -> list:
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
+ALLOWED_ORIGINS = list(
+    dict.fromkeys(REQUIRED_CORS_ORIGINS + _split_origins(os.getenv("CORS_ORIGINS", "")))
+)

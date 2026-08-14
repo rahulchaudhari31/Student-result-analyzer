@@ -97,7 +97,7 @@ python -m venv venv
 venv\Scripts\activate        # Windows (use: source venv/bin/activate on macOS/Linux)
 pip install -r requirements.txt
 cp .env.example .env         # fill in your Firebase values
-uvicorn app.main:app --reload --port 8000
+uvicorn main:app --reload --port 8000
 ```
 
 The API is now available at `http://localhost:8000` (docs at `/docs`).

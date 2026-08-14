@@ -6,11 +6,16 @@ venv/
 .venv/
 .env
 .env.local
+.env.*
+!.env.example
+!.env.*.example
 
 # Secrets
 service_account.json
 serviceAccountKey.json
 *firebase*.json
+*.pem
+*.p12
 
 # Backend (FastAPI)
 backend/.env

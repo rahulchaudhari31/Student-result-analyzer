@@ -33,6 +33,7 @@ class SaveResultRequest(BaseModel):
     department: str
     year: str
     students_data: List[Dict[str, Any]]
+    uploaded_by: Optional[str] = "Unknown"
     summary: Dict[str, Any]
 
 

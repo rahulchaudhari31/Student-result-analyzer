@@ -2,9 +2,9 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from .config import ALLOWED_ORIGINS
-from .firebase_manager import FirebaseError
-from .routers import auth, overview, results, students
+from app.config import ALLOWED_ORIGINS
+from app.firebase_manager import FirebaseError
+from app.routers import auth, overview, results, students
 
 app = FastAPI(
     title="Smart Result Analysis System API",

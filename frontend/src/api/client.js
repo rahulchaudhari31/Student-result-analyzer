@@ -54,8 +54,35 @@ export const overviewAPI = {
   get: () => api.get('/overview/'),
 }
 
+function formatValidationDetail(detail) {
+  if (!Array.isArray(detail)) return detail
+
+  return detail
+    .map((item) => {
+      if (item == null) return null
+      const field = Array.isArray(item?.loc) ? item.loc[item.loc.length - 1] : undefined
+      const rawMsg = item?.msg
+      const msg = Array.isArray(rawMsg) ? rawMsg.join(', ') : typeof rawMsg === 'string' ? rawMsg : ''
+      if (msg) return field ? `${field}: ${msg}` : msg
+      return field ? String(field) : JSON.stringify(item)
+    })
+    .filter((line) => line != null && line !== '')
+    .join('\n')
+}
+
 export function getErrorMessage(error, fallback = 'Something went wrong. Please try again.') {
-  return error?.response?.data?.detail || error?.message || fallback
+  try {
+    const detail = error?.response?.data?.detail
+    if (detail != null) {
+      const formatted = formatValidationDetail(detail)
+      if (typeof formatted === 'string' && formatted.trim()) return formatted
+    }
+    if (error instanceof Error && error.message) return error.message
+    if (typeof error === 'string' && error.trim()) return error
+  } catch {
+    // fall through to fallback
+  }
+  return fallback
 }
 
 export default api

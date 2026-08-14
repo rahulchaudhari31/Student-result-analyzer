@@ -11,12 +11,12 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('Teacher')
+  const [role, setRole] = useState('teacher')
 
   const [regName, setRegName] = useState('')
   const [regEmail, setRegEmail] = useState('')
   const [regPassword, setRegPassword] = useState('')
-  const [regRole, setRegRole] = useState('Student')
+  const [regRole, setRegRole] = useState('student')
 
   const { login } = useAuth()
   const navigate = useNavigate()
@@ -27,7 +27,7 @@ export default function LoginPage() {
     setLoading(true)
     try {
       const { data } = await authAPI.login(email, password)
-      if (data.role !== role.toLowerCase()) {
+      if (data.role !== role) {
         setError(`Role mismatch. This account is registered as '${data.role}'.`)
         return
       }
@@ -119,8 +119,8 @@ export default function LoginPage() {
             <div className="form-group">
               <label className="field-label">Role</label>
               <select className="select" value={role} onChange={(e) => setRole(e.target.value)}>
-                <option>Teacher</option>
-                <option>Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
               </select>
             </div>
             <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
@@ -161,8 +161,8 @@ export default function LoginPage() {
             <div className="form-group">
               <label className="field-label">I am a...</label>
               <select className="select" value={regRole} onChange={(e) => setRegRole(e.target.value)}>
-                <option>Student</option>
-                <option>Teacher</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
               </select>
             </div>
             <button className="btn btn-primary btn-block" type="submit" disabled={loading}>

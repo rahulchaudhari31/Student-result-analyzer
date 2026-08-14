@@ -1,4 +1,6 @@
-export const API_URL = import.meta.env.VITE_API_URL || ''
+const PROD_API_URL = 'https://new-result-analysis-system.onrender.com'
+
+export const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? '' : PROD_API_URL)
 
 export const GRADES = ['O', 'A+', 'A', 'B+', 'B', 'C', 'P', 'F']
 

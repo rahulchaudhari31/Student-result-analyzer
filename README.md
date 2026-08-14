@@ -355,10 +355,11 @@ smart-result-analysis-system/
 ### Frontend → Vercel
 
 1. In [Vercel](https://vercel.com): **Add New Project → Import repo**.
-2. Framework preset: **Vite**; build output `dist`.
-3. Env var: `VITE_API_URL=https://<your-backend>.onrender.com`.
-4. `vercel.json` is already configured to rewrite all routes to `index.html` (SPA routing).
-5. Deploy → e.g. `https://new-result-analysis-system-6zcb.vercel.app`.
+2. **Set the Root Directory to `frontend`** (Settings → Root Directory). The frontend app lives in a subfolder, so Vercel must build from `frontend/` — otherwise the build fails with *"No framework detected"* / *"Missing required file: package.json"* because there is no `package.json` at the repo root.
+3. Framework preset: **Vite**; build output `dist`; build command `npm run build`.
+4. Env var: `VITE_API_URL=https://<your-backend>.onrender.com`.
+5. `vercel.json` is already configured to rewrite all routes to `index.html` (SPA routing).
+6. Deploy → e.g. `https://new-result-analysis-system-6zcb.vercel.app`.
 
 ### ⚠️ Production checklist
 
@@ -372,6 +373,7 @@ smart-result-analysis-system/
 
 | Symptom | Cause | Fix |
 |---|---|---|
+| Vercel: *"No framework detected"* or *"Missing required file: package.json"* | Project Root Directory not set — Vercel is building from the repo root, where no `package.json` exists | Set the Vercel project's **Root Directory to `frontend`** (see [Frontend → Vercel](#frontend--vercel)) |
 | `Request failed with status code 500` (empty body) | Vite dev proxy target mismatch / backend not running | Ensure backend runs on port **5000**; keep `vite.config.js` proxy at `localhost:5000` |
 | **Network Error** in browser | Render free-tier cold start (API sleeps after ~15 min idle) | Wait 30–60 s and retry; first request wakes the instance |
 | CORS blocked on registration/login | Backend origin list missing the frontend URL | `CORS_ORIGINS` env var or code-level required origins (both include local & Vercel by default) |

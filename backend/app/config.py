@@ -29,6 +29,7 @@ FIREBASE_AUTH_URL = "https://identitytoolkit.googleapis.com/v1"
 REQUIRED_CORS_ORIGINS = [
     "http://localhost:5173",
     "https://new-result-analysis-system-6zcb.vercel.app",
+    "https://student-result-analyzer-five.vercel.app",
 ]
 
 
